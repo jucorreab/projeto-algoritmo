@@ -1,0 +1,210 @@
+//MEMBROS DO GRUPO:
+//Isabella Cristina Santos Silva - UC22103243  Ciência da Computação 
+//Júlia Corrêa de Souza Oliveira - UC22200753  Ciência da Computação 
+
+#include<stdio.h> //printf e scanf 
+#include<stdlib.h> //system pause
+#include<string.h> //string
+#include<locale.h> //configurar idioma aceitar acentos  
+
+#define ValorInteira 50.00  //definir constante - o valor não mudará durante o programa 
+#define ValorMeia 25.00   //definir constante - o valor não mudará durante o programa 
+
+int main(){ //corpo do programa 
+//variáveis usadas no código
+  int i, cod;
+  int sessoes,pessoas, idade; 
+  int espectadorverificado,somavaloresmeia = 0, somavaloresinteira = 0, quantidademeia = 0, quantidadeinteira = 0, valoringressos = 0;
+  int criancaM = 0, criancaF = 0, adultoM = 0, adultoF = 0, idadeMasculino =0, idadeFeminino = 0;
+  int ingresso, adolescenteM = 0, adolescenteF = 0, idosoM = 0, idosoF = 0;
+  int quantidadehomem, quantidademulher, somavalores = 0;
+  float total, inteira = 50.00, meia = 25.00;//dinheiro
+  char filme [100], formaingresso, sexo;
+  setlocale(LC_ALL, "Portuguese");  //configurando o idioma para o português, aceitar acentos 
+   
+   printf("BEM VINDO AO CINE BRASÍLIA \n\n");
+     
+ //condição do while // - número de sessões disponíveis 
+    
+	 do {
+    printf ("Me forneça a quantidade de sessões: \n"); //aceita apenas 2 sessões
+    scanf ("%d", &sessoes);
+    
+     if (sessoes != 2) //se o valor digitado for diferente de 2, repita 
+        printf("Valor inválido, digite novamente!\n");
+        
+    } while (sessoes != 2); 
+    
+//repetição quantidade de pessoas 
+     while(cod < 2){
+     cod = cod + 1;
+	 
+
+//condição do while // - quantas pessoas assistiram 
+    
+	do {
+	printf("Me forneça a quantidade de pessoas que assistiram à sessão: \n");
+    scanf ("%d", &pessoas);
+	  
+	if ( pessoas < 10){ //condição: o número de pessoas que assistiram à sessão não pode ser inferior à 10
+	printf("Valor invalido! Digite novamente! \n");
+	scanf("%d", &pessoas);
+	espectadorverificado = 0;  //validação do espectador 
+	  }
+	  else {
+	espectadorverificado = 1;  //validação do espectador 
+	  }
+	} while(espectadorverificado != 1); //condição final de repetição 
+	
+//sobre o filme 
+
+    fflush(stdin);  //limpa lixo de memória
+	printf("\n Qual o nome do fime dessa sessão: \n");
+	fgets(filme, 100, stdin);   //fgets para poder usar a tecla espaço
+		
+// condição if else e for // - entradas meia e inteira 
+
+    printf("VALORES ------------- \n Inteira: R$ 50.00 \n Meia: R$ 25.00"); //constantes já definidas 
+    
+	for(i=1; i <= pessoas; i ++){  //loop de repetição adicionando 1 à 1
+    printf("\n Qual é o ingresso desejado da pessoa %d? Digite M para meia ou I para inteira:", i);
+	scanf("%s", &formaingresso);
+	
+	if(formaingresso == 'i' || formaingresso == 'I'){  //se o ingresso for inteiro, soma +1 no proxímo
+		quantidadeinteira = quantidadeinteira + 1;
+		somavaloresinteira = somavaloresinteira + ValorInteira;   
+    }
+	else if(formaingresso == 'm' || formaingresso == 'M'){  //ou se o ingresso for meia, soma +1 no proxímo
+		quantidademeia = quantidademeia + 1;
+		somavaloresmeia = somavaloresmeia + ValorMeia;
+	}
+	else{
+		printf("Inválido!"); //se o char digitado não for correspondente à inteira ou meia  
+		i--;
+	}	
+	}
+}
+//condição switch case // saber o sexo dos espectadores
+
+    fflush(stdin); //limpar a memória antiga 
+    
+	for(i = 1; i <= pessoas; i ++){  //condição para ir para a proxíma pessoa 
+    printf("\n Qual é o sexo da pessoa %d: Digite M para masculino e F para Feminino  ", i);
+    scanf("%s", &sexo);
+    
+	switch(sexo){   //loop de repetição até o número da quantidade de pessoas presente 
+		    case 'M': {
+		    	quantidadehomem = quantidadehomem + 1; break; //se for homem digite "m" para masculino
+				}
+			case 'F':{
+				quantidademulher == quantidademulher + 1; break; //se for mulher digite "f" para feminino
+			    }
+			default:{
+				printf("Sexo inválido! Favor, digite novamente \n"); break; //se não for uma das opções, digite novamente
+			
+			}		
+	        }
+    }
+    
+    //divisão de idade dos espectadores por sexo
+    //idade das mulheres que assistiram
+	 
+    fflush(stdin);  //limpa lixo de memória
+    for(i = 1; i <= quantidademulher; i ++){    //loop para responder a idade de cada mulher presente 
+    printf("Idade da mulher %d:", i);
+    scanf("%d", &idadeFeminino);
+    
+    if(idadeFeminino <= 13 && idadeFeminino > 2){      //criaça de 2 à 13 anos
+    criancaF = criancaF + 1;
+	}
+	else if(idadeFeminino <= 17 && idadeFeminino > 13){  //adolescente de 13 à 17 anos
+	adolescenteF = adolescenteF + 1;
+	}
+	else if(idadeFeminino <= 64 && idadeFeminino > 17){  // adulto de 17 à 64 anos 
+	adultoF = adultoF + 1;
+	}
+	else if(idadeFeminino <= 100 && idadeFeminino > 64){  // idoso de 64 à 100 anos 
+    idosoF = idosoF + 1;
+	}
+	else if(idadeFeminino > 100){   // se o valor informado for maior que 100, valor inválido 
+	printf("Valor inválido! \n");
+	i --;	
+	}
+	else if(idadeFeminino <= 2){  // se o valor informado for menor ou igual à 2, valor inválido 
+	printf("Valor inválido! \n");
+	i --;
+	}
+	}
+ 
+//idade dos homens que assistiram 
+
+    fflush(stdin);  //limpa lixo de memória 
+    for(i = 1; i <= quantidadehomem; i ++){   //loop para responder a idade de cada homem presente 
+    printf("Idade da mulher %d: \n");
+    scanf("%d", &idadeMasculino);
+    
+    if(idadeMasculino <= 13 && idadeMasculino > 2){    //criaça de 2 à 13 anos
+    criancaM = criancaM + 1;
+	}
+	else if(idadeMasculino <= 17 && idadeMasculino > 13){   //adolescente de 13 à 17 anos
+	adolescenteM = adolescenteM + 1;
+	}
+	else if(idadeMasculino <= 64 && idadeMasculino > 17){   // adulto de 17 à 64 anos 
+	adultoM = adultoM + 1;
+	}
+	else if(idadeMasculino <= 100 && idadeMasculino > 64){    // idoso de 64 à 100 anos 
+	idosoM = idosoM + 1;
+	}
+	else if(idadeMasculino > 100){     // se o valor informado for maior que 100, valor inválido 
+	printf("Valor inválido! \n");
+	i --;
+	}
+	else if(idadeMasculino <= 2){    // se o valor informado for menor ou igual à 2, valor inválido 
+	printf("Valor inválido \n");
+	i --;
+	}
+	}
+	
+	printf("TABELA DE INFORMAÇÕES ----------");
+	
+//nome do filme 
+
+	printf("\n O nome do filme é: %s", filme);
+	
+// valores dos ingressos
+
+	printf("\n A soma dos valores das entradas meias é: %d", somavaloresmeia);
+	printf("\n A soma dos Valores das entradas Inteiras é: %d", somavaloresinteira);
+	somavalores = somavaloresmeia + somavaloresinteira;
+	printf("\n A soma dos valores das inteiras com as meias é: %d", valoringressos); 
+	
+	
+// quantidade de ingressos
+
+	if(quantidademeia>quantidadeinteira){
+		printf("\n\nTiveram mais meias que inteiras");
+	}else if(quantidadeinteira>quantidademeia){
+		printf("\nTiveram mais inteiras que meias");
+	}else{
+		printf("\nA quantidade de meias e inteiras são as mesmas");
+	}
+	
+// quantidade de telespectadores de cada sexo
+	
+	printf("\n\n%d = quantidade homens", quantidadehomem);
+  	printf("\n\n%d = quantidade mulheres", quantidademulher);
+  	
+// crianças,adolescentes, adultos e idosos de cada sexo
+	
+  	printf("\nMulheres Crianças: %d\n", criancaF);
+	printf("Mulheres Adolescentes: %d\n", adolescenteF);
+	printf("Mulheres Adultas: %d\n", adultoF);
+	printf("Mulheres Idosas: %d\n\n", idosoF);
+	printf("Homens Crianças: %d\n", criancaM);
+	printf("Homens Adolescentes: %d\n", adolescenteM);
+	printf("Homens Adultos: %d\n", adultoM);
+	printf("Homens Idosos: %d\n", idosoM);
+	
+//finalizar a repetição do código
+   return(0);		
+}
